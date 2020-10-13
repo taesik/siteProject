@@ -43,12 +43,6 @@
 				$("#boardListBtn").click(function() {
 					location.href="/siteProject/board/getBoardList.do";
 				});
-			
-			
-			 
-			
-			
-			
 			});
 		</script>
 <title>Insert title here</title>

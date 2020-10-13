@@ -72,7 +72,7 @@
 				//수정버튼 클릭시 처리 이벤트
 				$("updateForm").click(function(){
 					$("#pwdChk").show();
-					$("#msg").text("작성시 입려갛ㄴ 비밀번호를 이볅해 주세요.").css("color","#000009");
+					$("#msg").text("작성시 입력할 비밀번호를 입력해 주세요.").css("color","#000009");
 					butChk=1;
 				});
 					
@@ -122,17 +122,16 @@
 								$("#msg").text("작성시 입력한 비밀번호가 일치하지 않습니다.");
 								$("#passwd").select();
 							}else if(resultData==1){ //일치할 경우
-								
 								$("#msg").text("");
 							//console.log("비밀번호 일치");
 								if (butChk==1) {//수정버튼 클릭
 									goUrl = "/siteProject/board/updateForm.do";
 								}else if(butChk==2) {//삭제버튼 클릭
-									alert("확인");
 									goUrl = "/siteProject/board/deleteBoard.do";
 								}
 								$("#f_data").attr("action",goUrl);
-								$("#f_data").submit();
+								//$("#f_data").submit();  
+								//주석 주고 새로고침  404 떨어질거다
 							
 							}
 						}
