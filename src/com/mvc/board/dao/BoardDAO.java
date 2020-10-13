@@ -132,7 +132,7 @@ public class BoardDAO {
 	* @return BoardVO 리턴
 	 * @throws SQLException 
 	***********************************************************/
-	public BoardVO boardDetail(String _num) throws SQLException{
+	public BoardVO boardDetail(String _num){
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -163,7 +163,7 @@ public class BoardDAO {
 				vo.setRepstep(rs.getInt("repstep"));
 				vo.setRepindent(rs.getInt("repindent"));
 			}//end if
-		}catch(Exception e) {
+		}catch(Exception e) { 
 				e.printStackTrace();
 		}finally{
 			try{
@@ -186,25 +186,31 @@ public class BoardDAO {
 		Connection con =null;
 		PreparedStatement pstmt=null;
 		ResultSet rs =null;
-		int num = Integer.parseInt(_num);
-		String sql = "select * from board where num=?";
+		int result=0;
 		try{
 			con=ds.getConnection();
-			pstmt=con.prepareStatement(sql);
-			pstmt.setInt(1,num);
+			StringBuffer query =new StringBuffer();
+			query.append("select nvl((select 1 from board where num=? and passwd = ?),0) as result from Dual");
+			pstmt=con.prepareStatement(query.toString());
+			pstmt.setInt(1,Integer.parseInt(_num));
+			pstmt.setString(2,_passwd);
+			
 			rs=pstmt.executeQuery();
-			rs.next(); //??
-
-			return 1;
-		}catch(SQLException ex){
-			System.out.println("PasswdChk error : " +ex);
+			if (rs.next()) { //0 아니면 1이지만 그래도 무조건 rs.next()를 한다.
+				result =rs.getInt("result");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}finally{
 			try{
+				if(rs!=null)rs.close();
 				if(pstmt!=null)pstmt.close();
 				if(con!=null)con.close();	
-			}catch(Exception ex){}
+			}catch(SQLException ex){
+				ex.printStackTrace();
+			}
 		}
-		return 0;
+		return result;
 	}
 
 	/***********************************************************

@@ -62,6 +62,44 @@
 		
 		
 		</script>
+				<style type="text/css">
+			body {
+        		font-family: '맑은 고딕' 돋움; font-size:0.75em; color:#333
+
+		}
+		
+			th ,td{
+
+			         border:1px solid gray;
+			
+			         border-width: 1px 0;
+			
+			         border-collapse: collapse;
+			
+			         text-align: center;
+			
+			         padding:8px;
+			
+		}
+
+
+			td{
+
+         border-style:dotted;
+
+		}
+
+
+
+			tr:hover td{
+
+         background-color: tomato;
+
+         cursor : pointer;
+
+}
+		
+		</style>
 		
 <title>목록보기</title>
 	</head>

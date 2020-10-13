@@ -33,7 +33,6 @@
 					else if (!chkData("#content","작성할 내용을")) return;
 					else if (!chkData("#passwd","비밀번호를")) return;
 					else {
-						alert("JS 확인")
 						$("#f_writeForm").attr({
 							"method":"post",
 							"action":"/siteProject/board/insertBoard.do"
@@ -63,12 +62,12 @@
 	<div class="container">
 		<div class="row">
 			<form  id="f_writeForm">
-				<table 
+				<table  width ="200" height="300"
 					style="text-align: center; border: 1px solid #dddddd">
 					<thead>
 						<tr>
 							<td class="ac"> 작성자 </td>
-							<td class="ac" ><input type="text" id="author" class="form-control" placeholder="작성자" name = "author" maxlength="50"> </td>
+							<td class="ac" ><input width ="200" type="text" id="author" class="form-control" placeholder="작성자" name = "author" maxlength="50"> </td>
 						</tr>
 
 					</thead>
@@ -77,17 +76,17 @@
 
 						<tr>
 							<td class="ac"> 글 제목 </td>
-							<td><input type="text" class="form-control" placeholder="글 제목" id="title" name="title" maxlength="100"/></td>
+							<td><input width ="200" type="text" class="form-control" placeholder="글 제목" id="title" name="title" maxlength="100"/></td>
 						</tr>
 
 						<tr>
 							<td class="ac"> 글 내용 </td>
-							<td><textarea class="form-control" id="content" placeholder="글 내용" name="content" maxlength="2048" style="height: 350px;"></textarea></td>
+							<td><textarea width ="200" height = "300"rows="10" cols="10" class="form-control" id="content" placeholder="글 내용" name="content" maxlength="2048" style="height: 350px;"></textarea></td>
 
 						</tr>
 						<tr>
 							<td class="ac" > 비밀번호 </td>
-							<td><input type="password" name="passwd" id="passwd" class="form-control">
+							<td><input width ="200" height = "300" "type="password" name="passwd" id="passwd" class="form-control">
 						</tr>
 					</tbody>
 

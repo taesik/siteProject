@@ -32,6 +32,12 @@ public class BoardService {
 
 	public BoardVO boardDetail(String _num) {
 		BoardVO vo = dao.boardDetail(_num);
+		vo.setContent(vo.getContent().toString().replace("\n", "<br/>"));// \n을 br tag로
+		//  \n 을  <br>로 바꾸겟다는 것.그래야 콘텐트에 쓴게 엔터값이 적용이 되서 저장이된다.
 		return vo;
+	}
+	public int boardPasswdChk(String _num,String _passwd) {
+		int result = dao.boardPasswdChk(_num, _passwd);
+		return result;
 	}
 }

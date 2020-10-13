@@ -3,6 +3,7 @@ package com.mvc.common.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.mvc.board.controller.DetailBoardController;
 import com.mvc.board.controller.GetBoardListController;
 import com.mvc.board.controller.InsertFormController;
 import com.mvc.board.controller.InsertBoardController;
@@ -21,6 +22,8 @@ public class HandlerMapping {
 		mappings.put("/board/insertForm.do", new InsertFormController());
 		//담는다 식별자(uri)가 들어오면 로직을 처리할 애가 있어야 하는데  그 로직 처리할 경로를 설정하는 것이다.
 		mappings.put("/board/insertBoard.do", new InsertBoardController());
+		mappings.put("/board/detailBoard.do", new DetailBoardController());
+		mappings.put("/board/passwdCheck.do", new PasswdCheckController());
 	}
 	
 	public Controller getController(String path) {
