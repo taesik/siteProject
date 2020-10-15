@@ -39,7 +39,6 @@
 					$("#search").val('${param.search}');
 				}
 				
-				
 				/* 검색 대상이 변경될 때마다 처리 이벤트*/
 	            $("#search").change(function(){
 	               if($("#search").val()=="all"){

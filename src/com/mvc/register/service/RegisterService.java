@@ -12,6 +12,6 @@ public class RegisterService {
 		return instance;
 	}
 	//  로직 메서드들...
-	public 
+	
 	
 }

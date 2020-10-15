@@ -32,7 +32,7 @@
 		
 		</div>
 		<table>
-			<tr>
+			<tr> <%--개인회원 구분 체크 --%>
 				<td>회원구분 </td>  <td><input type="radio" id="member" > </td>
 			</tr>
 			<tr>
@@ -48,7 +48,7 @@
 				<td>이름*</td> <td><input type="text"  id="name"> </td> 
 			</tr>
 			<tr>
-				<td>주소* </td> <td><input type="text" read > 
+				<td>주소* </td> <td><input type="text" readonly="readonly" > 
 			</tr>
 		</table>
 	

@@ -99,8 +99,6 @@ public class BoardDAO {
          boolean result= false;
          StringBuffer sql = new StringBuffer();
 			
-
-			
 			int rowCount=0;	
 			try{
 			con=getConnection();
@@ -234,7 +232,6 @@ public class BoardDAO {
 		PreparedStatement pstmt=null;
 		boolean success = false;
 		
-		System.out.println("asdfasdf");
 		
 		try {
 			con=getConnection();
