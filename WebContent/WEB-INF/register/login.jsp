@@ -32,6 +32,9 @@
 		
 		<input type="text" placeholder="아이디" id="id"/> <br/>
 		<input type="text" placeholder="비밀번호" id="passwd"/><br/> 
+		
+		<input type="button" id="signIn" value="회원가입"/> 
+		<input type="button" id="login" value="로그인"/> 
 				
 		
 	</body>

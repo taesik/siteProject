@@ -17,7 +17,6 @@ public class GetBoardListController implements Controller {
 		//최초 요청시 null 값 처리
 		if(search==null) {
 			search="all";
-	
 		}
 		
 		BoardVO vo = new BoardVO();

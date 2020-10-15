@@ -24,7 +24,7 @@ public class LoginController implements Controller {
 		//}
 		
 		
-		return "/register/loginController.do";
+		return "/register/login";
 	}
 
 }
