@@ -1,4 +1,4 @@
-package com.mvc.board.controller;
+package com.mvc.register.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,7 +9,7 @@ public class InsertFormController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		return "/register/insertForm";
+		return null;
 	}
 
 }

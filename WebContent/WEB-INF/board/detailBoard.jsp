@@ -21,44 +21,7 @@
 		<!--[if lt IE 9]>
 			<script src="../js/html5shiv.js"></script>
 		<![endif]-->
-		<style type="text/css">
-			body {
-        		font-family: '맑은 고딕' 돋움; font-size:0.75em; color:#333
-
-		}
 		
-			th ,td{
-
-			         border:1px solid gray;
-			
-			         border-width: 1px 0;
-			
-			         border-collapse: collapse;
-			
-			         text-align: center;
-			
-			         padding:8px;
-			
-		}
-
-
-			td{
-
-         border-style:dotted;
-
-		}
-
-
-
-			tr:hover td{
-
-         background-color: tomato;
-
-         cursor : pointer;
-
-}
-		
-		</style>
 		<script type="text/javascript" src="/siteProject/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/siteProject/include/js/common.js"></script>
 		<script type="text/javascript">
@@ -69,13 +32,21 @@
 				
 				
 				
+				
+				
 				//수정버튼 클릭시 처리 이벤트
-				$("updateForm").click(function(){
+				$("#updateForm").click(function(){
 					$("#pwdChk").show();
 					$("#msg").text("작성시 입력할 비밀번호를 입력해 주세요.").css("color","#000009");
 					butChk=1;
 				});
 					
+				//비밀번호 입력 양식 enter 제거      
+				$("#passwd").bind("keydown",function(event){
+					if(evemt.keyCode === 13){  //keyCode 13번은 엔터
+						event.preventDefault();
+					}
+				});
 				//삭제버튼 클릭 시 처리 이벤트 
 				$("#boardDelete").click(function(){
 					$("#pwdChk").show();
@@ -84,7 +55,7 @@
 				});
 				
 				//비밀번호 확인 버튼 클릭 시 처리 이벤트
-				$("#pwdBut").click(function() {
+				$("#pwdBut").click(function(event) {
 					boardPwdConfirm(); // 하나 만든다.
 				});//페이지가 로딩될고 할게 아니다. 딴데다 만들거다.
 				
@@ -92,14 +63,10 @@
 					$("#pwdChk").hide();
 					butChk = "";
 				});
-				
-				
-				
-				
-				
-				
-				
 				//목록 버튼 클릭 시 처리 이벤트 
+				
+				
+				
 				
 			});
 				//비밀번호 입력간이 공백값인 걸 제어해야한다.
@@ -130,26 +97,12 @@
 									goUrl = "/siteProject/board/deleteBoard.do";
 								}
 								$("#f_data").attr("action",goUrl);
-								//$("#f_data").submit();  
+								$("#f_data").submit();  
 								//주석 주고 새로고침  404 떨어질거다
-							
 							}
 						}
-						
-						
-						
-						
-						
 					});
-					
-					
-					
-					
-					
-					
 				}
-					
-				
 			}
 		
 		</script>

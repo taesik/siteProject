@@ -1,13 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
-		
+	<head>
+	<meta charset="UTF-8">
+	<meta charset="utf-8" />
 		<!-- html4 : 파일의 인코딩 방식 지정 -->
-		<!--<meta http-equiv="Content-Type" content="text/html; charset=
-		utf-8" />-->
+		<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
 
 		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
 		<!-- 브라우저의 호환성 보기 모드를 막고, 해당 브라우저에서 지원하는 가장 최신 버전의 방식으로 HTML 보여주도록 설정.-->
@@ -20,16 +19,12 @@
 				
 		<!-- IE8 이하에서 HTML5를 인식시키기 위해 아래의 패스필터를 적용-->
 		<!--[if lt IE 9]>
-			<script src="/siteProject/js/html5shiv.js"></script>
+			<script src="../js/html5shiv.js"></script>
 		<![endif]-->
-		<script type="text/javascript" src = "../js/jquery-1.12.4.min.js"></script>
-		
-</head>
-<body>
-	<h4> 시작페이지
-	</h4>
-	<a href = "/siteProject/board/getBoardList.do"> 게시판</a> <br/>
-	<a href="/siteProject/register/login.do">로그인 창</a><br />
 
-</body>
+<title>Insert title here</title>
+	</head>
+	<body>
+		
+	</body>
 </html>

@@ -3,13 +3,19 @@ package com.mvc.board.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mvc.board.service.BoardService;
 import com.mvc.common.controller.Controller;
 
-public class InsertFormController implements Controller {
+public class DeleteBoardController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		return "/register/insertForm";
+		String num = request.getParameter("num");
+		
+		BoardService service = BoardService.getInstance();
+		service.boardDelete(num);
+		
+		return "/board/getBoardList.do";
 	}
 
 }

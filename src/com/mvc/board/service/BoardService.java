@@ -15,8 +15,8 @@ public class BoardService {
 		return service;
 	}
 	
-	public ArrayList<BoardVO> boardList() {
-		ArrayList<BoardVO> list = dao.boardList();
+	public ArrayList<BoardVO> boardList(BoardVO vo) {
+		ArrayList<BoardVO> list = dao.boardList(vo);
 		return list;
 	}
 	
@@ -39,5 +39,19 @@ public class BoardService {
 	public int boardPasswdChk(String _num,String _passwd) {
 		int result = dao.boardPasswdChk(_num, _passwd);
 		return result;
+	}
+
+	public BoardVO updateForm(String _num) {
+		BoardVO vo =dao.boardDetail(_num);
+		return vo;
+	}
+
+	public boolean boardUpdate(BoardVO vo) {
+		boolean result = dao.boardUpdate(vo);
+		return result;
+	}
+
+	public void boardDelete(String _num) {
+		dao.boardDelete(_num);
 	}
 }

@@ -11,6 +11,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import com.mvc.board.vo.BoardVO;
+import com.sun.net.httpserver.Authenticator.Success;
 
 public class BoardDAO {
 	private DataSource ds;
@@ -37,7 +38,7 @@ public class BoardDAO {
 	 * 
 	 ****************************************************************************/
 	
-	public ArrayList<BoardVO> boardList() {
+	public ArrayList<BoardVO> boardList(BoardVO vo) {
 		ArrayList<BoardVO> list = new ArrayList<BoardVO>();
 		Connection con = null;
 		PreparedStatement pstmt= null;
@@ -48,9 +49,19 @@ public class BoardDAO {
 			query.append("SELECT num,author,title, ");
 			query.append("to_char(writeday,'YYYY/MM/DD') writeday, ");
 			query.append("readcnt, reproot, repstep,repindent from board ");
-			query.append("order by reproot desc, repstep asc");
 			
+			if ("title".equals(vo.getSearch())) {  //검색 조건
+				query.append("where title LIKE ? ");
+			}else if("author".equals(vo.getSearch())) {
+				query.append("where author like ? ");
+			}else if("content".equals(vo.getSearch())) {
+				query.append(" where content like ? ");
+			}
+			query.append(" order by repRoot desc, repStep asc");
 			pstmt = con.prepareStatement(query.toString());
+			if (!"all".equals(vo.getSearch())) {
+				pstmt.setString(1, "%"+vo.getKeyword()+"%" );
+			}
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -188,7 +199,7 @@ public class BoardDAO {
 		ResultSet rs =null;
 		int result=0;
 		try{
-			con=ds.getConnection();
+			con=getConnection();
 			StringBuffer query =new StringBuffer();
 			query.append("select nvl((select 1 from board where num=? and passwd = ?),0) as result from Dual");
 			pstmt=con.prepareStatement(query.toString());
@@ -219,46 +230,44 @@ public class BoardDAO {
 	* @return boolean.
 	***********************************************************/
 	public boolean boardUpdate(BoardVO vo){
-		StringBuffer sql = null;
 		Connection con =null;
 		PreparedStatement pstmt=null;
-		ResultSet rs =null;
+		boolean success = false;
 		
-		sql.append("update board set title=?,content=? where num = ?");
+		System.out.println("asdfasdf");
+		
 		try {
-			con=ds.getConnection();
+			con=getConnection();
+			StringBuffer sql = new StringBuffer();
+			sql.append("update board set title=?, content=? ");  //여기 끝에 쉼표 주면안된다. 이거 왜 그런건지 이해 안된다 물어보자.
+			if(vo.getPasswd()!="") sql.append(", passwd = ? "); //비밀번호가 비어있지 않으면 비밀번호도 업데이트 하겟다.
+			sql.append("where num=?"); 							//여기 다시 물어보자 
+			
 			pstmt=con.prepareStatement(sql.toString());
 			pstmt.setString(1,vo.getTitle());
 			pstmt.setString(2,vo.getContent());
-			pstmt.setInt(3,vo.getNum());
-			pstmt.executeUpdate();
-			return true;
+			if(vo.getPasswd()!="") {
+				pstmt.setString(3, vo.getPasswd());
+				pstmt.setInt(4, vo.getNum());
+			}else {
+				pstmt.setInt(3, vo.getNum());
+			}
+			
+			int count=pstmt.executeUpdate(); //적용된 행의 수
+			System.out.println("execute Query 확인"+ count);
+			if(count==1) success = true;
+			
 		}catch(Exception ex) {
 			System.out.println("Modify error : " +ex);
 		}finally{
-			if(rs!=null)
 				try {
-					rs.close();
+					if(pstmt!=null) pstmt.close();
+					if(con!=null) con.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			if(pstmt!=null)
-				try {
-					pstmt.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			if(con!=null)
-				try {
-					con.close();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 		}
-		return false;
+		return success;
 		
 	}
 
@@ -269,31 +278,28 @@ public class BoardDAO {
 	public void boardDelete(String  _num){
 		Connection con =null;
 		PreparedStatement pstmt=null;
-		ResultSet rs =null;
-		String sql = "delete from board where num=?";
-		int num= Integer.parseInt(_num);
-		int result=0;
 		
 		try {
-			con=ds.getConnection();
+			con=getConnection();
+			String sql = "delete from board where num=?";
 			pstmt=con.prepareStatement(sql);
-			pstmt.setInt(1,num);
-			result=pstmt.executeUpdate();
+			pstmt.setInt(1,Integer.parseInt(_num));
+			pstmt.executeUpdate();
 	        
 			
 		}catch(Exception ex) {
-			System.out.println("Delete error : " +ex);
+			ex.printStackTrace();	
 		}finally {
 			try{
 				if(pstmt!=null) pstmt.close();
 				if(con!=null) con.close();
-			}catch(Exception ex) 
-				{ System.out.println("con, pstmt closing error : " + ex);
+			}catch(SQLException e) {
+				e.printStackTrace();
 			}
 		
 		}
 	
-	}
+	}//end delete
 	public void readCount(String _num) {
 		Connection con = null;
 		PreparedStatement pstmt = null;

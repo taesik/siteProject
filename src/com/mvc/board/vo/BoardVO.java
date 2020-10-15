@@ -11,10 +11,13 @@ public class BoardVO {
 	private int repstep;//답변글의 들여쓰기 지정
 	private int repindent;//답변글 작성시 사용 답변 글의 순서 지정
 	private String passwd;//비밀번호
+	private String search="";
+	private String keyword="";
 	
 	public BoardVO () {}
+	
 	public BoardVO(int num, String author, String title, String content, int readcnt, String writeday, int reproot,
-			int repstep, int repindent, String passwd) {
+			int repstep, int repindent, String passwd, String search, String keyword) {
 		super();
 		this.num = num;
 		this.author = author;
@@ -26,7 +29,10 @@ public class BoardVO {
 		this.repstep = repstep;
 		this.repindent = repindent;
 		this.passwd = passwd;
+		this.search = search;
+		this.keyword = keyword;
 	}
+
 	public int getNum() {
 		return num;
 	}
@@ -86,6 +92,22 @@ public class BoardVO {
 	}
 	public void setPasswd(String passwd) {
 		this.passwd = passwd;
+	}
+
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
+	}
+
+	public String getKeyword() {
+		return keyword;
+	}
+
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
 	}
 	
 

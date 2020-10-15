@@ -66,7 +66,7 @@ public class DispatcherServlet extends HttpServlet {
       view=viewResolver.getView(viewName);
       //5. 검색된 화면으로 이동한다.
       try {
-         RequestDispatcher dispatcher=request.getRequestDispatcher(view);
+         RequestDispatcher dispatcher=request.getRequestDispatcher(view);   
          dispatcher.forward(request, response);
       }catch(Exception ex) {
          System.out.println("forward 오류: "+ex);

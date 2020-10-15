@@ -25,10 +25,51 @@
 		
 		<script type="text/javascript" src="/siteProject/include/js/jquery-1.12.4.min.js"> </script>  
 		<script type="text/javascript" src="/siteProject/include/js/jquery.slides.js"> </script>
+		<script type="text/javascript" src="/siteProject/include/js/common.js"> </script>
 		
 		<script type="text/javascript">
 			$(function () {
-				//글쓰기 버튼 클릭시
+				//검색 후 검색 대상과 검색 단어 출력
+				if ('${data.keyword}'!="") { //표현언어라 묶어 ''줘야한다.
+					$("#keyword").val('${data.keyword}');
+					$("#search").val('${data.search}');
+				}
+				if('${param.keyword}'!="") {
+					$("#keyword").val('${param.keyword}');
+					$("#search").val('${param.search}');
+				}
+				
+				
+				/* 검색 대상이 변경될 때마다 처리 이벤트*/
+	            $("#search").change(function(){
+	               if($("#search").val()=="all"){
+	                  $("#keyword").val("전체 데이터 조회합니다.");
+	               }else if($("#search").val()!="all"){
+	                  $("#keyword").val("");
+	                  $("#keyword").focus();
+	               }
+	            });
+	            
+	            /* 검색 버튼 클릭 시 처리 이벤트*/
+	            $("#searchData").click(function(){
+	               if($("#search").val()!="all"){
+	                  if(!chkData(keyword,"검색어를")) return;
+	               }
+	               goPage();
+	            });
+	            /*검색을 위한 실질적인 처리 함수*/
+	            function goPage(){
+	               if($("#search").val()=="all"){
+	                  $("#keyword").val("");
+	               }
+	               $("#f_search").attr({
+	                  "method":"post",
+	                  "action":"/siteProject/board/getBoardList.do"
+	               });
+	               $("#f_search").submit();
+	            }
+
+	            //글쓰기 버튼 클릭시
 				$("#writeForm").click(function() {// 글쓰기 버튼 클릭시 
 					location.href="/siteProject/board/insertForm.do"//insertFormController 
 						//uri  버튼 클릭했을 때 입력화면이 가도록
@@ -61,45 +102,49 @@
 				<style type="text/css">
 			body {
         		font-family: '맑은 고딕' 돋움; font-size:0.75em; color:#333
-
 		}
-		
 			th ,td{
-
 			         border:1px solid gray;
-			
 			         border-width: 1px 0;
-			
 			         border-collapse: collapse;
-			
 			         text-align: center;
-			
 			         padding:8px;
-			
 		}
-
-
 			td{
-
-         border-style:dotted;
-
+         			border-style:dotted;
 		}
-
-
-
 			tr:hover td{
-
          background-color: tomato;
-
          cursor : pointer;
-
 }
-		
 		</style>
-		
 <title>목록보기</title>
 	</head>
 	<body>
+	         <form name="detailForm" id="detailForm">
+            <input type="hidden" name="num" id="num">
+         </form>
+         <div id="boardSearch" class="text-right">
+            <form id="f_search" name="f_search" class="form-inline">
+               <div class="form-group">
+                  <label>검색조건</label>
+                  <select id="search" name="search" class="form-control">
+                     <option value="all">전체</option>
+                     <option value="title">제목</option>
+                     <option value="content">작성자</option>
+                     <option value="author">번호</option>
+                  </select>
+                  <input type="text" id="keyword" name="keyword" placeholder="검색어를 입력하세요" maxlength="20" class="form-control" />
+                  <button type="button" class="btn btn-primary btn-sm" id="searchData">검색</button>
+               </div>
+            </form>
+            
+            
+            
+            
+            
+            
+	
 		<div class="contentContainer container-fluid">
 			<div class="text-center"><h3>글목록</h3></div>
 			<!-- post 방식을 위해 폼을 만ㄷ근다. -->
