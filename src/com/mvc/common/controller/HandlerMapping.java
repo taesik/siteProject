@@ -8,6 +8,8 @@ import com.mvc.board.controller.DetailBoardController;
 import com.mvc.board.controller.GetBoardListController;
 import com.mvc.board.controller.InsertBoardController;
 import com.mvc.board.controller.InsertFormController;
+import com.mvc.board.controller.InsertReplyController;
+import com.mvc.board.controller.ReplyFormController;
 import com.mvc.board.controller.UpdateBoardController;
 import com.mvc.board.controller.UpdateFormController;
 import com.mvc.register.controller.LoginController;
@@ -31,12 +33,13 @@ public class HandlerMapping {
 		mappings.put("/board/updateForm.do", new UpdateFormController());
 		mappings.put("/board/updateBoard.do", new UpdateBoardController());
 		mappings.put("/board/deleteBoard.do", new DeleteBoardController());
-	
+		mappings.put("/board/replyForm.do", new ReplyFormController());
+		mappings.put("/board/insertReply.do", new InsertReplyController());
+		
 	//=============5조 팀프로젝트 =============
-		mappings.put("/register/login.do", new LoginController());
-		mappings.put("/register/insertForm.do", new InsertFormController());
-	
-	
+	      mappings.put("/register/login.do", new LoginController());
+	     // mappings.put("/register/insertRegister.do", new InsertRegisterController());
+	      //mappings.put("/register/insertInfo.do", new InsertInfoController());
 	
 	
 	}

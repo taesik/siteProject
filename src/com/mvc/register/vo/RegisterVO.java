@@ -5,16 +5,16 @@ public class RegisterVO {
 	private String passwd;
 	private String name;
 	private String address;
-	private String phone_number;
+	private String phone;
 	private String email;
 	public RegisterVO () {}
-	public RegisterVO(String id, String passwd, String name, String address, String phone_number, String email) {
+	public RegisterVO(String id, String passwd, String name, String address, String phone, String email) {
 		super();
 		this.id = id;
 		this.passwd = passwd;
 		this.name = name;
 		this.address = address;
-		this.phone_number = phone_number;
+		this.phone = phone;
 		this.email = email;
 	}
 	public String getId() {
@@ -41,11 +41,11 @@ public class RegisterVO {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public String getPhone_number() {
-		return phone_number;
+	public String getPhone() {
+		return phone;
 	}
-	public void setPhone_number(String phone_number) {
-		this.phone_number = phone_number;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	public String getEmail() {
 		return email;
@@ -53,8 +53,6 @@ public class RegisterVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	
 	
 	
 	

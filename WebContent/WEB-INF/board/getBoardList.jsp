@@ -15,8 +15,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 		<!--viewport : 화면에 보이는 영역을 제어하는 기술. width는 device-width로 설정(브라우저 너비를 장치 너비에 맞추어 표시). initial-scale는 초기비율(보이는 영역과 웹 페이지를 맞춤). user-scalable는 사용자가 화면축소를 하지 못하도록 설정.-->
       			
-		<link rel="shortcut icon" href="../image/icon.png" />
-		<link rel="apple-touch-icon" href="../image/icon.png" />
+		<link rel="shortcut icon" href="/siteProject/image/icon.png" />
+		<link rel="apple-touch-icon" href="/siteProject/image/icon.png" />
 				
 		<!-- IE8 이하에서 HTML5를 인식시키기 위해 아래의 패스필터를 적용-->
 		<!--[if lt IE 9]>
@@ -93,10 +93,6 @@
 					});
 				});
 			});
-		
-		
-		
-		
 		</script>
 				<style type="text/css">
 			body {
@@ -106,7 +102,6 @@
 			         border:1px solid gray;
 			         border-width: 1px 0;
 			         border-collapse: collapse;
-			         text-align: center;
 			         padding:8px;
 		}
 			td{
@@ -130,18 +125,13 @@
                   <select id="search" name="search" class="form-control">
                      <option value="all">전체</option>
                      <option value="title">제목</option>
-                     <option value="content">작성자</option>
-                     <option value="author">번호</option>
+                     <option value="author">작성자</option>
+                     <option value="content">글내용</option>
                   </select>
                   <input type="text" id="keyword" name="keyword" placeholder="검색어를 입력하세요" maxlength="20" class="form-control" />
                   <button type="button" class="btn btn-primary btn-sm" id="searchData">검색</button>
                </div>
             </form>
-            
-            
-            
-            
-            
             
 	
 		<div class="contentContainer container-fluid">
@@ -169,7 +159,17 @@
 								<c:forEach var="vo" items="${list}" >
 									<tr class="tac" data-num="${vo.num}">
 										<td>${vo.num } </td>
-										<td class="tal"><span class = "goDetail">${vo.title}</span></td>
+										<%-- <td class="tal"><span class = "goDetail">${vo.title}</span></td> --%>
+										<%--이렇게 주면 답변 구분이 안되서 주석달음 --%>
+										<td class="tal">
+											<c:if test="${vo.repStep>0}" >
+												<c:forEach begin="1" end = "${vo.repIndent}" >
+													&nbsp;&nbsp;&nbsp;
+												</c:forEach>
+												<img src="/siteProject/include/image/replyicon.jpg" />
+											</c:if>
+										<span class="goDetail">${vo.title}</span>
+										</td>
 										<td>${vo.author } </td>
 										<td>${vo.writeday  } </td>
 										<td>${vo.readcnt } </td>

@@ -71,9 +71,9 @@ public class BoardDAO {
 				data.setTitle(rs.getString("title"));
 				data.setWriteday(rs.getString("writeday"));
 				data.setReadcnt(rs.getInt("readcnt"));
-				data.setRepstep(rs.getInt("repstep"));
-				data.setReproot(rs.getInt("reproot"));
-				data.setRepindent(rs.getInt("repindent"));
+				data.setRepStep(rs.getInt("repstep"));
+				data.setRepRoot(rs.getInt("reproot"));
+				data.setRepIndent(rs.getInt("repindent"));
 				
 				list.add(data);
 			}//end while
@@ -168,9 +168,9 @@ public class BoardDAO {
 				vo.setContent(rs.getString("content"));
 				vo.setWriteday(rs.getString("writeday"));
 				vo.setReadcnt(rs.getInt("readcnt"));
-				vo.setReproot(rs.getInt("reproot"));
-				vo.setRepstep(rs.getInt("repstep"));
-				vo.setRepindent(rs.getInt("repindent"));
+				vo.setRepRoot(rs.getInt("reproot"));
+				vo.setRepStep(rs.getInt("repstep"));
+				vo.setRepIndent(rs.getInt("repindent"));
 			}//end if
 		}catch(Exception e) { 
 				e.printStackTrace();
@@ -319,6 +319,94 @@ public class BoardDAO {
 				e2.printStackTrace();
 			}
 		}
+		
+	}
+	/***********************
+	 * makeReply 메서드 : 답변글의 기존 repStep 1 증가.
+	 * @param _root
+	 * @param _step
+	 */
+	 
+		public void makeReply(int _root,int _step) {
+			Connection con = null;
+			PreparedStatement pstmt = null;
+			try {
+				con=getConnection();
+				
+				StringBuffer query = new StringBuffer();
+				query.append("update board set repstep =repstep +1 ");
+				query.append("where reproot = ? and repstep > ? ");
+				
+				pstmt= con.prepareStatement(query.toString());
+				pstmt.setInt(1,_root);
+				pstmt.setInt(2,_step);
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				try {
+					if(pstmt!=null) pstmt.close();
+					if(con!=null) con.close();
+				} catch (SQLException e2) {
+					e2.printStackTrace();
+				}
+			}
+		}
+	
+	/************************
+	 * replyInsert() 메서드 : 답변 입력 처리
+	 * @param vo
+	 * @return
+	 *************************/
+	
+	
+	
+	public boolean replyInsert(BoardVO vo) {
+		//위에 올라가면 insert가 있다. 그걸보자. 복붙
+		 makeReply(vo.getRepRoot(),vo.getRepStep());
+		 Connection con=null;
+         PreparedStatement pstmt=null;
+         boolean result= false;
+			
+			int rowCount=0;	
+		try{
+			StringBuffer sql = new StringBuffer();
+			con=getConnection();
+			//seq안쓰고 max 뽑아다가 1더해서 쓸거면 preparedStatement를 두개 만들어야한다
+			//아니면 안에 select max를 써야한다.
+			sql.append("insert into board(num,title,author,content,reproot, ");
+			sql.append("repstep ,repindent,passwd )");
+			sql.append("values(board_seq.nextVal,?,?,?,?,?,?,?)");
+			
+			pstmt=con.prepareStatement(sql.toString());
+			pstmt.setString(1,vo.getTitle());
+			pstmt.setString(2,vo.getAuthor());
+			pstmt.setString(3,vo.getContent());
+			pstmt.setInt(4,vo.getRepRoot());
+			pstmt.setInt(5,vo.getRepStep()+1);
+			pstmt.setInt(6,vo.getRepIndent()+1);
+			pstmt.setString(7,vo.getPasswd());
+			
+			
+			rowCount=pstmt.executeUpdate();
+			if(rowCount==1)result= true;
+			
+		}catch(SQLException ex){
+			System.out.println("boardInsert error : " + ex);
+			ex.printStackTrace();
+		}catch(Exception e) {
+			System.out.println("error boardInsert =  "+ e);
+		
+		}finally{
+				try {
+					if (pstmt!=null) pstmt.close();
+					if (con!=null) con.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+		}
+		return result;
+		
 		
 	}
 }

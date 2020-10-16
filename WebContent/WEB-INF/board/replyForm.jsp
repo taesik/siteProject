@@ -21,46 +21,64 @@
 		<!--[if lt IE 9]>
 			<script src="../js/html5shiv.js"></script>
 		<![endif]-->
-		
+
 		<script type="text/javascript" src="/siteProject/include/js/jquery-1.12.4.min.js"></script>
 		<script type="text/javascript" src="/siteProject/include/js/common.js"></script>
 		<script type="text/javascript" src="/siteProject/include/dist/js/bootstrap.min.js"></script>
 		<script type="text/javascript">
-			$(function() {
-				$("#boardInsert").click(function() {
-					if (!chkData("#author","이름을")) return;
-					else if (!chkData("#title","제목을")) return;
-					else if (!chkData("#content","작성할 내용을")) return;
-					else if (!chkData("#passwd","비밀번호를")) return;
-					else {
-						$("#f_writeForm").attr({
-							"method":"post",
-							"action":"/siteProject/board/insertBoard.do"
-						});
-						$("#f_writeForm").submit();
-					}
+		$(function () {
+			var conText = $("#content").val();
+			$("#content").val("\n\n\n\n>>>>>>>>>>>>>>>>>>>>>>>>>기존글>>>>>>>>>>\n\n"+conText);
+		
+		$("#boardInsert").click(function() {
+			//입력값 체크
+			if (!chkData("#author","이름을")) return;
+			else if (!chkData("#title","제목을")) return;
+			else if (!chkData("#content","작성할 내용을")) return;
+			else if (!chkData("#passwd","비밀번호를")) return;
+			
+			else {
+				$("#f_replyForm").attr({
+					"method":"post",
+					"action":"/siteProject/board/insertReply.do"
+					});
+				$("#f_replyForm").submit();
 				}	
-			});
-				$("#boardListBtn").click(function() {
-					location.href="/siteProject/board/getBoardList.do";
-				});
-				
-			});
+		});
+		//목록 버튼 클릭시 처리 이벤트
+		$("#boardListBtn").click(function() {
+			location.href="/siteProject/board/getBoardList.do"; 
+		});
+		});
 		</script>
 <title>Insert title here</title>
 	</head>
 	<body>
-		<h2>insertForm.jsp</h2>
-
-	<!-- 네비게이션  -->
-	<!-- 게시판 -->
-
-	<div class="container">
+		<div class="container">
 		<div class="row">
-			<form  id="f_writeForm">
+			<form  id="f_replyForm" name="f_replyForm">
+				<%--답변글 필요 --%>
+				<input type="hidden" name="num" value="${reply.num}">
+				<input type="hidden" name="repRoot" value="${reply.repRoot}">
+				<input type="hidden" name="repStep" value="${reply.repStep}">
+				<input type="hidden" name="repIndent" value="${reply.repIndent}">
+				
+				
+			
 				<table  width ="200" height="300"
 					style="text-align: center; border: 1px solid #dddddd">
+					<colgroup>
+						<col width="17%" />
+						<col width="83%" />
+					</colgroup>
+					
 					<thead>
+						<%--줘도 되고 안줘도 된다 답변 달려는 근본글에 대한 번호와 조회수를 EL로 보여싿. --%>
+						<tr>
+							<td colspan="2"> 원래글번호 ${reply.num} &nbsp;(조회수 : ${reply.readcnt}) </td>
+						</tr>
+					
+					
 						<tr>
 							<td class="ac"> 작성자 </td>
 							<td class="ac" ><input width ="200" type="text" id="author" class="form-control" placeholder="작성자" name = "author" maxlength="50"> </td>
@@ -72,13 +90,18 @@
 
 						<tr>
 							<td class="ac"> 글 제목 </td>
-							<td><input width ="200" type="text" class="form-control" placeholder="글 제목" id="title" name="title" maxlength="100"/></td>
+							<td><input value="${reply.title}" width ="200" type="text" class="form-control" 
+							placeholder="글 제목" id="title" name="title" maxlength="100"/></td>
+							
 						</tr>
 
 						<tr>
 							<td class="ac"> 글 내용 </td>
-							<td><textarea width ="200" height = "300"rows="10" cols="10" class="form-control" id="content" placeholder="글 내용" name="content" maxlength="2048" style="height: 350px;"></textarea></td>
-
+							<td><textarea  width ="200" height = "300"rows="10" 
+							cols="10" class="form-control" id="content" 
+							placeholder="글 내용" name="content" 
+							maxlength="2048" style="height: 350px;">${reply.content}</textarea></td>
+							
 						</tr>
 						<tr>
 							<td class="ac" > 비밀번호 </td>
@@ -96,16 +119,6 @@
 		</div>
 
 	</div>
-
-
-
-
-
-
-
-
-
-
-
+		
 	</body>
 </html>

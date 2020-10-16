@@ -7,17 +7,18 @@ public class BoardVO {
 	private String content;
 	private int readcnt;
 	private String writeday;
-	private int reproot;//답변글 작성시 사용 원래글의 번호 참조
-	private int repstep;//답변글의 들여쓰기 지정
-	private int repindent;//답변글 작성시 사용 답변 글의 순서 지정
+	private int repRoot;//답변글 작성시 사용 원래글의 번호 참조
+	private int repStep;//답변글의 들여쓰기 지정
+	private int repIndent;//답변글 작성시 사용 답변 글의 순서 지정
 	private String passwd;//비밀번호
 	private String search="";
 	private String keyword="";
 	
 	public BoardVO () {}
 	
-	public BoardVO(int num, String author, String title, String content, int readcnt, String writeday, int reproot,
-			int repstep, int repindent, String passwd, String search, String keyword) {
+
+	public BoardVO(int num, String author, String title, String content, int readcnt, String writeday, int repRoot,
+			int repStep, int repIndent, String passwd, String search, String keyword) {
 		super();
 		this.num = num;
 		this.author = author;
@@ -25,13 +26,14 @@ public class BoardVO {
 		this.content = content;
 		this.readcnt = readcnt;
 		this.writeday = writeday;
-		this.reproot = reproot;
-		this.repstep = repstep;
-		this.repindent = repindent;
+		this.repRoot = repRoot;
+		this.repStep = repStep;
+		this.repIndent = repIndent;
 		this.passwd = passwd;
 		this.search = search;
 		this.keyword = keyword;
 	}
+
 
 	public int getNum() {
 		return num;
@@ -69,24 +71,37 @@ public class BoardVO {
 	public void setWriteday(String writeday) {
 		this.writeday = writeday;
 	}
-	public int getReproot() {
-		return reproot;
+	
+	public int getRepRoot() {
+		return repRoot;
 	}
-	public void setReproot(int reproot) {
-		this.reproot = reproot;
+
+
+	public void setRepRoot(int repRoot) {
+		this.repRoot = repRoot;
 	}
-	public int getRepstep() {
-		return repstep;
+
+
+	public int getRepStep() {
+		return repStep;
 	}
-	public void setRepstep(int repstep) {
-		this.repstep = repstep;
+
+
+	public void setRepStep(int repStep) {
+		this.repStep = repStep;
 	}
-	public int getRepindent() {
-		return repindent;
+
+
+	public int getRepIndent() {
+		return repIndent;
 	}
-	public void setRepindent(int repindent) {
-		this.repindent = repindent;
+
+
+	public void setRepIndent(int repIndent) {
+		this.repIndent = repIndent;
 	}
+
+
 	public String getPasswd() {
 		return passwd;
 	}

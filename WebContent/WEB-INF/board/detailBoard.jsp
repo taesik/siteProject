@@ -64,10 +64,18 @@
 					butChk = "";
 				});
 				//목록 버튼 클릭 시 처리 이벤트 
+				$("#boardListBtn").click(function () {
+					location.href="/siteProject/board/getBoardList.do";
+				});
 				
-				
-				
-				
+				//답변 클릭시 처리 이벤트 
+				$("#boardReply").click(function(){
+					$("#f_data").attr({
+						"method":"post",
+						"action":"/siteProject/board/replyForm.do"
+					});
+					$("#f_data").submit();
+				});
 			});
 				//비밀번호 입력간이 공백값인 걸 제어해야한다.
 				//  ==========비밀 번호 클릭시 실질적인 처리 함수

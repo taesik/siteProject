@@ -11,10 +11,16 @@ public class LoginController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		String uri = request.getRequestURI();
+		String view = "";
+		
+		
 		String id = request.getParameter("id");
 		String passwd = request.getParameter("passwd");
 		
 		RegisterService service = RegisterService.getInstance();
+		String name = service.loginCheck(id,passwd);
+		
 		//RegisterVO data = service.updateForm(num);
 		
 		//request.setAttribute("updateData", data);

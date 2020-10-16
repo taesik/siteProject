@@ -54,4 +54,14 @@ public class BoardService {
 	public void boardDelete(String _num) {
 		dao.boardDelete(_num);
 	}
+
+	public BoardVO replyForm(String _num) {
+		BoardVO vo = dao.boardDetail(_num);
+		return vo;
+	}
+
+	public boolean replyInsert(BoardVO vo) {
+		boolean result = dao.replyInsert(vo);
+		return result;
+	}
 }
