@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page session  %>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  %>    
 <!DOCTYPE html>
 <html>
    <head>
@@ -55,6 +55,15 @@
                </div>
             </form>
          </div>
+         <c:if test="${member != null}"> 
+         	<li>
+         		${member.userName}님 환영합니다.
+         	</li>
+         	<li>
+         		<a href= "/register/signout">로그아웃</a>
+         	</li>	
+         
+         </c:if>
          <div id="register">
             
          </div>
