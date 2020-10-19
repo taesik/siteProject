@@ -5,11 +5,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mvc.common.controller.Controller;
 
-public class LoginController implements Controller {
+public class InsertRegisterController implements Controller {
 
    @Override
    public String execute(HttpServletRequest request, HttpServletResponse resopnse) {
-      return "/register/login";
+      return  "/register/insertRegister";
    }
 
 }

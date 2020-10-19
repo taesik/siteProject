@@ -2,82 +2,127 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-	<head>
-	<meta charset="UTF-8">
-	<meta charset="utf-8" />
-		<!-- html4 : 파일의 인코딩 방식 지정 -->
-		<!--<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />-->
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
 
-		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
-		<!-- 브라우저의 호환성 보기 모드를 막고, 해당 브라우저에서 지원하는 가장 최신 버전의 방식으로 HTML 보여주도록 설정.-->
-		
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
-		<!--viewport : 화면에 보이는 영역을 제어하는 기술. width는 device-width로 설정(브라우저 너비를 장치 너비에 맞추어 표시). initial-scale는 초기비율(보이는 영역과 웹 페이지를 맞춤). user-scalable는 사용자가 화면축소를 하지 못하도록 설정.-->
-      			
-		<link rel="shortcut icon" href="../image/icon.png" />
-		<link rel="apple-touch-icon" href="../image/icon.png" />
-				
-		<!-- IE8 이하에서 HTML5를 인식시키기 위해 아래의 패스필터를 적용-->
-		<!--[if lt IE 9]>
-			<script src="../js/html5shiv.js"></script>
-		<![endif]-->
-
-<title>Insert title here</title>
-	</head>
-	<body>
-		<div id="header">
-			
-		</div>
-		<div id="nav">
-		
-		</div>
-		<table>
-			<tr> <%--개인회원 구분 체크 --%>
-				<td>회원구분 </td>  <td><input type="radio" id="member" > </td>
-			</tr>
-			<tr>
-				<td>아이디*</td> <td>  <input type="text" id="id" ></label> </td>
-			</tr>
-			<tr>	
-				<td>비밀번호*</td> <td> <input type="text" id="passwd"></td> 
-			</tr>
-			<tr>	
-				<td>비밀번호 확인*</td> <td><input type="text"  id="passwd"> </td> 
-			</tr>
-			<tr>	
-				<td>이름*</td> <td><input type="text"  id="name"> </td> 
-			</tr>
-			<tr>
-				<td>주소* </td> <td><input type="text" readonly="readonly" > 
-			</tr>
-			<tr>
-				<td>유선전화 </td> 
-				<td>
-				<select value="선택">
-					<option value="02">02</option>
-					<option value="031">031</option>
-					<option value="032">032</option>
-					<option value="033">033</option>
-					<option value="041">041</option>
-					<option value="042">042</option>
-					<option value="043">043</option>
-					<option value="044">044</option>
-					<option value="051">051</option>
-					<option value="052">052</option>
-					<option value="053">053</option>
-					<option value="054">054</option>
-					<option value="055">055</option>
-					<option value="061">061</option>
-					<option value="062">062</option>
-					<option value="063">063</option>
-					<option value="064">064</option>
-					<option value="070">070</option>
-					<option value="0502">0502</option>
-				</select>"
-				<input type="number" >
-			</tr>
-			
-		</table>
-	
-	</body>
+      <title>Insert title here</title>
+      
+      <link rel="shortcut icon" href="/siteProject/image/icon.png" />
+      <link rel="apple-touch-icon" href="/siteProject/image/icon.png" />
+      
+      <link rel="stylesheet" type="text/css" href="/siteProject/include/dist/css/bootstrap.min.css" />
+      <link rel="stylesheet" type="text/csS" href="/siteProject/include/dist/css/bootstrap-theme.css" />
+      
+   
+      
+      <script type="text/javascript" src="/siteProject/include/js/jquery-1.12.4.min.js"></script>
+      <script type="text/javascript" src="/siteProject/include/dist/js/bootstrap.min.js"></script>
+      <script type="text/javascript">
+         $(function(){
+            //등록 버튼을 눌렀을 때.
+            $("#subBtn").click(function(){
+               var address=$("#postNum").val()+" "+$("#basicAddress").val()+" "+$("#restAddress").val();
+               var phone=$("#firstPhoneNum").val()+""+$("#secondPhoneNum").val()+""+$("#lastPhoneNum").val();
+               $("#address").val(address);
+               $("#phone").val();
+               
+               if($("#id").val().replace(/\s/g,"")==""){
+                  alert("아이디를 입력해주세요");
+                  $("#id").focus();
+                  return;
+               }else if($("#passwd").val().replace(/\s/g,"")==""){
+                  alert("비밀번호를 입력해주세요");
+                  $("#passwd").focus();
+                  return;
+               }else if($("#name").val().replace(/\s/g,"")==""){
+                  alert("이름을 입력해주세요");
+                  $("#name").focus();
+                  return;
+               }else if($("#address").val().replace(/\s/g,"")==""){
+                  alert("주소를 입력해주세요");
+                  $("#postNum").focus();
+                  return;
+               }else if($("#phone").val().replace(/\s/g,"")==""){
+                  alert("전화번호를 입력해주세요");
+                  $("#phone").focus();
+                  return;
+               }else if($("#email").val().replace(/\s/g,"")==""){
+                  alert("이메일을 입력해주세요");
+                  $("#email").focus();
+                  return;
+               }else{
+                  $("#f_writeForm").attr({
+                     "method":"post",
+                     "action":"/siteProject/register/insertInfo.do"
+                  });
+                  $("#f_writeForm").submit();
+               }
+            })
+         })
+      </script>
+      <!--[if lt IE 9]>
+      <script src="../js/html5shiv.js"></script>
+      <![endif]-->
+      
+   </head>
+   
+   <body>
+      <div id="container">
+         <h2>회원가입</h2>
+         <form id="f_writeForm">
+            <input type="hidden" name="address" id="address" />   
+            <input type="hidden" name="phone" id="phone" />      
+            <div id="insertContainer">
+               <table class="table table-bordered">
+                  <tr>
+                     <td>아이디</td>
+                     <td><input type="text" name="id" id="id" maxlength="20"></td>
+                  </tr>
+                  <tr>
+                     <td>비밀번호</td>
+                     <td><input type="password" name="passwd" id="passwd" maxlength="16" /></td>
+                  </tr>
+                  <tr>
+                     <td>비밀번호 확인</td>
+                     <td><input type="password" id="chkPasswd" maxlength="16" /></td>
+                  </tr>
+                  <tr>
+                     <td>이름</td>
+                     <td><input type="text" id="name" name="name" maxlength="10" /></td>
+                  </tr>
+                  <tr>
+                     <td rowspan="3">주소</td>
+                     <td><input type="text" id="postNum" name="postNum" maxlength="8" size="8" /> 우편번호</td>
+                  </tr>
+                  <tr>
+                     <td><input type="text" id="basicAddress" name="basicAddress" maxlength="50" /> 기본주소</td>
+                  </tr>
+                  <tr>
+                     <td><input type="text" id="restAddress" name="restAddress" maxlength="50" /> 나머지주소</td>
+                  </tr>
+                  <tr>
+                     <td>휴대전화</td>
+                     <td>
+                        <input type="text" id="firstPhoneNum" maxlength="3" size="3" value="010"/> - 
+                        <input type="text" id="secondPhoneNum" size="4" maxlength="4" /> - 
+                        <input type="text" id="lastPhoneNum" size="4" maxlength="4" />
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>이메일</td>
+                     <td>
+                        <input type="text" id="email" name="email" maxlength="40" />
+                     </td>
+                  </tr> 
+               </table>
+            </div>
+         </form>
+         <div id="btnGroup">
+            <input type="button" id="subBtn" value="등록" />
+            <input type="button" id="loginBtn" value="취소" />
+         </div>
+      </div>
+   </body>
 </html>

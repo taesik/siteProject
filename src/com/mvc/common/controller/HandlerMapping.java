@@ -12,6 +12,8 @@ import com.mvc.board.controller.InsertReplyController;
 import com.mvc.board.controller.ReplyFormController;
 import com.mvc.board.controller.UpdateBoardController;
 import com.mvc.board.controller.UpdateFormController;
+import com.mvc.register.controller.InsertInfoController;
+import com.mvc.register.controller.InsertRegisterController;
 import com.mvc.register.controller.LoginController;
 
 public class HandlerMapping {
@@ -38,8 +40,8 @@ public class HandlerMapping {
 		
 	//=============5조 팀프로젝트 =============
 	      mappings.put("/register/login.do", new LoginController());
-	     // mappings.put("/register/insertRegister.do", new InsertRegisterController());
-	      //mappings.put("/register/insertInfo.do", new InsertInfoController());
+	      mappings.put("/register/insertRegister.do", new InsertRegisterController());
+	      mappings.put("/register/insertInfo.do", new InsertInfoController());
 	
 	
 	}
